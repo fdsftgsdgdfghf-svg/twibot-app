@@ -4,7 +4,6 @@ GET /api/catalog/chat/{chat_id} — детальная информация о �
 """
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
-from mangum import Mangum
 
 from db import get_chat_details
 
@@ -16,7 +15,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 @app.get("/api/catalog/chat")
 def handler(chat_id: int = Query(...)):
@@ -32,5 +30,3 @@ def handler(chat_id: int = Query(...)):
         "likes_count": chat.get("likes_count") or 0,
     }
 
-
-handler = Mangum(app)
