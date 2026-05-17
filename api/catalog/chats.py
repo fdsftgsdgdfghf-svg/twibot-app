@@ -4,7 +4,6 @@ GET /api/catalog/chats — список чатов с пагинацией и ф
 import psycopg2.extras
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
-from mangum import Mangum
 
 from db import VALID_CATEGORIES, VALID_CATEGORY_IDS, get_catalog_chats, get_conn, put_conn
 
@@ -16,7 +15,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 @app.get("/api/catalog/chats")
 def handler(
@@ -71,5 +69,3 @@ def handler(
 
     return {"items": items}
 
-
-handler = Mangum(app)

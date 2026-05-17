@@ -5,7 +5,6 @@ POST /api/catalog/description/{chat_id} — обновить описание ч
 from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from mangum import Mangum
 
 from db import get_chat_details, is_chat_admin, get_conn, put_conn
 
@@ -18,10 +17,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 class DescriptionInput(BaseModel):
     description: str
-
 
 def get_user_id(request: Request) -> int:
     raw = request.headers.get("X-User-Id")
@@ -34,7 +31,6 @@ def get_user_id(request: Request) -> int:
     if uid <= 0:
         raise HTTPException(status_code=403, detail="Forbidden")
     return uid
-
 
 @app.post("/api/catalog/description")
 def handler(chat_id: int = Query(...), body: DescriptionInput = None, request: Request = None):
@@ -54,5 +50,3 @@ def handler(chat_id: int = Query(...), body: DescriptionInput = None, request: R
         put_conn(conn)
     return {"status": "ok", "description": body.description}
 
-
-handler = Mangum(app)
