@@ -44,15 +44,15 @@ export function fetchCatalog(
   params.set('sort', sort);
   params.set('limit', String(limit));
   params.set('offset', String(offset));
-  return request<CatalogResponse>(`/api/catalog/chats?${params}`);
+  return request<CatalogResponse>(`/api/chats?${params}`);
 }
 
 export function fetchChatDetail(chatId: number): Promise<ChatDetail> {
-  return request<ChatDetail>(`/api/catalog/chat/${chatId}`);
+  return request<ChatDetail>(`/api/chat/${chatId}`);
 }
 
 export function toggleLike(chatId: number): Promise<LikeResponse> {
-  return request<LikeResponse>(`/api/catalog/like/${chatId}`, {
+  return request<LikeResponse>(`/api/like/${chatId}`, {
     method: 'POST',
     headers: authHeaders(),
   });
@@ -62,7 +62,7 @@ export function updateDescription(
   chatId: number,
   description: string,
 ): Promise<{ status: string; description: string }> {
-  return request(`/api/catalog/description/${chatId}`, {
+  return request(`/api/description/${chatId}`, {
     method: 'POST',
     headers: { ...authHeaders(), 'Content-Type': 'application/json' },
     body: JSON.stringify({ description }),
@@ -70,7 +70,7 @@ export function updateDescription(
 }
 
 export function reportChat(chatId: number): Promise<ReportResponse> {
-  return request<ReportResponse>(`/api/catalog/report/${chatId}`, {
+  return request<ReportResponse>(`/api/report/${chatId}`, {
     method: 'POST',
     headers: authHeaders(),
   });
