@@ -5,7 +5,7 @@ import type {
   ReportResponse,
 } from '../types';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+const API_URL = 'http://138.16.162.9:8000';
 
 async function request<T>(
   path: string,
