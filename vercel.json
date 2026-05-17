@@ -1,7 +1,7 @@
 {
   "functions": {
     "api/chats.py": {
-      "runtime": "python3.9"
+      "includeFiles": "api/**"
     }
   },
   "rewrites": [
